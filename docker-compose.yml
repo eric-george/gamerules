@@ -1,0 +1,15 @@
+name: gamerules
+services:
+  rules-vectordb:
+    hostname: rules-vectordb
+    image: pg-embedding-local
+    ports:
+      - 5433:5432
+    restart: always
+    environment:
+      - POSTGRES_DB=rules-vectors
+      - POSTGRES_USER=rulesdbuser
+      - POSTGRES_PASSWORD=rulesdbpassword
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./pg-vector-init.sql:/docker-entrypoint-initdb.d/init.sql
